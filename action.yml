@@ -42,5 +42,5 @@ runs:
     - ${{ inputs.args }}
 
 branding:
-icon: 'upload-cloud'  
-color: 'purple'
+  icon: 'upload-cloud'  
+  color: 'purple'
