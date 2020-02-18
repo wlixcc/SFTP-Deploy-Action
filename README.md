@@ -4,6 +4,8 @@
 
 > 使用此`action`部署你的项目到服务器上,`仅支持密钥对连接`
 
+> [使用Github Action 部署项目到云服务器](https://zhuanlan.zhihu.com/p/107545396)
+
 
 ## Inputs
 
@@ -59,7 +61,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	          remote_path: '/var/www/app' #make sure dir exist
 	          args: '-o ConnectTimeout=5'
 
-## 1. [Deploy React App Example](https://github.com/wlixcc/React-App-Action/actions/runs/40686292/workflow)
+## 1. [Deploy React App Example](https://github.com/wlixcc/React-Deploy)
 
 > If you use nginx, all you need to do is upload the static files to the server after the project is built
 
