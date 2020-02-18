@@ -9,32 +9,35 @@
 
 ### `username`
 
-> **Required** sftp username.
+**Required** sftp username.
 
 ### `server`
 
-> **Required** sftp server address.
+**Required** sftp server address.
 
 ### `port`
 
-> sftp srever port , default `22`.
+sftp srever port , default `22`
 
 ### `ssh_private_key`
 
-> **Required** you can copy private_key from your `ssh_private_key.pem file`, keep format, and save at`repo/settings/secrets`
+ **Required** you can copy private_key from your `ssh_private_key.pem file`, keep format, and save at`repo/settings/secrets`
+
+
+![](./resource/secret.jpg)
 
 ### `local_path`
 
-> **Required** `local_path` of you project, if you want put single file:use path like `./myfile`, if you want put directory: use path like `./static/*`, it will put all files under `static` directory. Default to `./*`(will put all files in your repo).
+ **Required** `local_path` of you project, if you want put single file:use path like `./myfile`, if you want put directory: use path like `./static/*`, it will put all files under `static` directory. Default to `./*`(will put all files in your repo).
 
 ### `remote_path`
-> **Required** remote_path
+ **Required** remote_path
 
 ### `args`
-> args of sftp cmd, E.g.`-o ConnectTimeout=5`
+args of sftp cmd, E.g.`-o ConnectTimeout=5`
 
 
-## Example usage	
+## Action Example	
 
 
 	on: [push]
@@ -47,7 +50,7 @@
 	      - name: Checkout
 	        uses: actions/checkout@v2
 	      - name: deploy file
-	        uses: ./ # Uses an action in the root directory
+	        uses: wlixcc/SFTP-Deploy-Action@v1.0
 	        with:
 	          username: 'root'
 	          server: 'your server ip'
@@ -55,3 +58,73 @@
 	          local_path: './static/*'
 	          remote_path: '/var/www/app' #make sure dir exist
 	          args: '-o ConnectTimeout=5'
+
+## 1. [Deploy React App Example](https://github.com/wlixcc/React-App-Action/actions/runs/40686292/workflow)
+
+> If you use nginx, all you need to do is upload the static files to the server after the project is built
+
+	on: [push]
+	
+	jobs:
+	  deploy_job:
+	    runs-on: ubuntu-latest
+	    name: build&deploy
+	    steps:
+	      # To use this repository's private action, you must check out the repository
+	      - name: Checkout
+	        uses: actions/checkout@v2
+	
+	      - name: Install Dependencies
+	        run: yarn
+	      - name: Build
+	        run: yarn build
+	
+	      - name: deploy file to server
+	        uses: wlixcc/SFTP-Deploy-Action@v1.0
+	        with:
+	          username: 'root'
+	          server: '${{ secrets.SERVER_IP }}'
+	          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+	          local_path: './build/*'
+	          remote_path: '/var/www/react-app'
+	          args: '-o ConnectTimeout=5'
+	          
+ ![](./resource/reactExample.jpg)
+ 
+## 2.Deploy Umi App Example (Ant Design Pro)
+
+	name: continuous deployment
+	on: [push]
+	
+	jobs:
+	  deploy_job:
+	    runs-on: ubuntu-latest
+	    name: build&deploy
+	    steps:
+	      # To use this repository's private action, you must check out the repository
+	      - name: Checkout
+	        uses: actions/checkout@v2
+	     
+	      - name: Install umi
+	        run: yarn global add umi  
+	
+	      - name: Install Dependencies
+	        run: yarn
+	      - name: Build
+	        run: yarn build
+	
+	      - name: deploy file to server
+	        uses: wlixcc/SFTP-Deploy-Action@v1.0
+	        with:
+	          username: 'root'
+	          server: '${{ secrets.SERVER_IP }}'
+	          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+	          local_path: './dist/*'
+	          remote_path: '/var/www/umiapp'
+	          args: '-o ConnectTimeout=5'
+ ![](./resource/umiExample.jpg)
+	          
+
+ 
+ 
+ 	          
