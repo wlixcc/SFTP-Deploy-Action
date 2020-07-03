@@ -56,7 +56,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	        with:
 	          username: 'root'
 	          server: 'your server ip'
-	          private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+	          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
 	          local_path: './static/*'
 	          remote_path: '/var/www/app' #make sure dir exist
 	          args: '-o ConnectTimeout=5'
