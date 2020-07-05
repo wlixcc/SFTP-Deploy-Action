@@ -58,7 +58,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	          server: 'your server ip'
 	          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
 	          local_path: './static/*'
-	          remote_path: '/var/www/app' #make sure dir exist
+	          remote_path: '/var/www/app'
 	          args: '-o ConnectTimeout=5'
 
 ## 1. [Deploy React App Example](https://github.com/wlixcc/React-Deploy)
