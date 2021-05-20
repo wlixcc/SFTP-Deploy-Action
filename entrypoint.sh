@@ -5,7 +5,7 @@ set -eu
 
 echo 'Connecting to SSH server and creating directory..'
 
-ssh -o StrictHostKeyChecking=no -p $3 -i $TEMP_SSH_PRIVATE_KEY_FILE $1@$2 mkdir -p $6
+sshpass -p $4 ssh -o StrictHostKeyChecking=no -p $3 $1@$2 mkdir -p $6
 
 echo 'Connection to SSH server and directory creation finished successfully!'
 
