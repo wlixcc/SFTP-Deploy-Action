@@ -1,36 +1,34 @@
 # SFTP Deploy action
 
-> Use this action to deploy your files to server using `SSH Private Key`
+Use this action to deploy your files to an SSH server using password authentication.
 
-> 使用此`action`部署你的项目到服务器上,`仅支持密钥对连接`
-
-> [使用Github Action 部署项目到云服务器](https://zhuanlan.zhihu.com/p/107545396)
+Based on SFTP-Deploy-Action https://github.com/wlixcc/SFTP-Deploy-Action
 
 
 ## Inputs
 
 ### `username`
 
-**Required** sftp username.
+**Required** SSH username.
 
 ### `server`
 
-**Required** sftp server address.
+**Required** SSH server address.
 
 ### `port`
 
-sftp srever port , default `22`
+SSH server port , default `22`
 
-### `ssh_private_key`
+### `ssh_password`
 
- **Required** you can copy private_key from your `ssh_private_key.pem file`, keep format, and save at`repo/settings/secrets`
+ **Required** SSH password
 
 
 ![](./resource/secret.jpg)
 
 ### `local_path`
 
- **Required** `local_path` of you project, if you want put single file:use path like `./myfile`, if you want put directory: use path like `./static/*`, it will put all files under `static` directory. Default to `./*`(will put all files in your repo).
+ **Required** `local_path` of your project, if you want transfer a single file:use a path like `./myfile`, if you want transfer a directory: use a path like `./static/*`, it will transfer all files under the `static` directory. Defaults to `./*`(will transfer all files in your repo).
 
 ### `remote_path`
  **Required** remote_path
@@ -39,7 +37,7 @@ sftp srever port , default `22`
 args of sftp cmd, E.g.`-o ConnectTimeout=5`
 
 
-## Action Example	
+## Action Example
 
 
 	on: [push]
@@ -56,7 +54,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	        with:
 	          username: 'root'
 	          server: 'your server ip'
-	          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+	          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
 	          local_path: './static/*'
 	          remote_path: '/var/www/app'
 	          args: '-o ConnectTimeout=5'
@@ -66,7 +64,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 > If you use nginx, all you need to do is upload the static files to the server after the project is built
 
 	on: [push]
-	
+
 	jobs:
 	  deploy_job:
 	    runs-on: ubuntu-latest
@@ -75,12 +73,12 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	      # To use this repository's private action, you must check out the repository
 	      - name: Checkout
 	        uses: actions/checkout@v2
-	
+
 	      - name: Install Dependencies
 	        run: yarn
 	      - name: Build
 	        run: yarn build
-	
+
 	      - name: deploy file to server
 	        uses: wlixcc/SFTP-Deploy-Action@v1.0
 	        with:
@@ -90,14 +88,14 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	          local_path: './build/*'
 	          remote_path: '/var/www/react-app'
 	          args: '-o ConnectTimeout=5'
-	          
+
  ![](./resource/reactExample.jpg)
- 
+
 ## 2.Deploy Umi App Example (Ant Design Pro)
 
 	name: continuous deployment
 	on: [push]
-	
+
 	jobs:
 	  deploy_job:
 	    runs-on: ubuntu-latest
@@ -106,15 +104,15 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	      # To use this repository's private action, you must check out the repository
 	      - name: Checkout
 	        uses: actions/checkout@v2
-	     
+
 	      - name: Install umi
-	        run: yarn global add umi  
-	
+	        run: yarn global add umi
+
 	      - name: Install Dependencies
 	        run: yarn
 	      - name: Build
 	        run: yarn build
-	
+
 	      - name: deploy file to server
 	        uses: wlixcc/SFTP-Deploy-Action@v1.0
 	        with:
@@ -125,8 +123,8 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	          remote_path: '/var/www/umiapp'
 	          args: '-o ConnectTimeout=5'
  ![](./resource/umiExample.jpg)
-	          
 
- 
- 
- 	          
+
+
+
+

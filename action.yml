@@ -1,26 +1,26 @@
 # action.yml
 name: 'SFTP Deploy'
-description: 'Deploy file to your server use sftp & ssh private key'
+description: 'Deploy files to your server with SFTP and password authenticated SSH'
 inputs:
   username:
     description: 'username'
     required: true
-  server:  
-    description: 'your sftp server'
+  server:
+    description: 'your SSH server'
     required: true
-  port: 
-    description: 'your sftp server port, default to 22'
+  port:
+    description: 'your SSH server port, defaults to 22'
     required: true
     default: "22"
-  ssh_private_key:
-    description: 'you can copy private_key from your *.pem file, keep format'
+  ssh_password:
+    description: 'you SSH password'
     required: true
   local_path:
-    description: 'will put all file under this path'
+    description: 'will transfer all files from this path'
     required: true
     default: ./*
   remote_path:
-    description: 'files will copy to under remote_path'
+    description: 'files will be transferred to this path'
     required: true
     default: /
 
@@ -36,11 +36,11 @@ runs:
     - ${{ inputs.username }}
     - ${{ inputs.server }}
     - ${{ inputs.port }}
-    - ${{ inputs.ssh_private_key }}
+    - ${{ inputs.ssh_password }}
     - ${{ inputs.local_path }}
     - ${{ inputs.remote_path }}
     - ${{ inputs.args }}
 
 branding:
-  icon: 'upload-cloud'  
+  icon: 'upload-cloud'
   color: 'purple'
