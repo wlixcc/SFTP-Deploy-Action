@@ -33,7 +33,12 @@ sftp srever port , default `22`
  **Required** `local_path` of you project, if you want put single file:use path like `./myfile`, if you want put directory: use path like `./static/*`, it will put all files under `static` directory. Default to `./*`(will put all files in your repo).
 
 ### `remote_path`
+
  **Required** remote_path
+
+### `sftp_only`
+
+connection via sftp protocol only, the default value is `false`. If your port only accepts the sftp protocol, set this option to `true`. However, please note that when this option is set to `true`, the remote folder will not be created automatically.
 
 ### `args`
 args of sftp cmd, E.g.`-o ConnectTimeout=5`
