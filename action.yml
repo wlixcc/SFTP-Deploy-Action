@@ -5,6 +5,9 @@ inputs:
   username:
     description: 'username'
     required: true
+   password:
+     description: 'password'
+     required: true
   server:  
     description: 'your sftp server'
     required: true
@@ -34,6 +37,7 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.username }}
+    - ${{ inputs.password }}
     - ${{ inputs.server }}
     - ${{ inputs.port }}
     - ${{ inputs.ssh_private_key }}
