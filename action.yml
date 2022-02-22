@@ -23,6 +23,10 @@ inputs:
     description: 'files will copy to under remote_path'
     required: true
     default: /
+  sftp_only:
+    description: 'connection via sftp protocol only'
+    required: false
+    default: false
 
   args:
     description: 'sftp args'
@@ -39,6 +43,7 @@ runs:
     - ${{ inputs.ssh_private_key }}
     - ${{ inputs.local_path }}
     - ${{ inputs.remote_path }}
+    - ${{ inputs.sftp_only }}
     - ${{ inputs.args }}
 
 branding:
