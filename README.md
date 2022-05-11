@@ -57,7 +57,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	      - name: Checkout
 	        uses: actions/checkout@v2
 	      - name: deploy file
-	        uses: wlixcc/SFTP-Deploy-Action@v1.0
+	        uses: wlixcc/SFTP-Deploy-Action@v1.2.2
 	        with:
 	          username: 'root'
 	          server: 'your server ip'
@@ -87,7 +87,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	        run: yarn build
 	
 	      - name: deploy file to server
-	        uses: wlixcc/SFTP-Deploy-Action@v1.0
+	        uses: wlixcc/SFTP-Deploy-Action@v1.2.2
 	        with:
 	          username: 'root'
 	          server: '${{ secrets.SERVER_IP }}'
@@ -121,7 +121,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	        run: yarn build
 	
 	      - name: deploy file to server
-	        uses: wlixcc/SFTP-Deploy-Action@v1.0
+	        uses: wlixcc/SFTP-Deploy-Action@v1.2.2
 	        with:
 	          username: 'root'
 	          server: '${{ secrets.SERVER_IP }}'
