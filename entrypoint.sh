@@ -12,11 +12,15 @@ printf "%s" "$4" >$TEMP_SSH_PRIVATE_KEY_FILE
 # avoid Permissions too open
 chmod 600 $TEMP_SSH_PRIVATE_KEY_FILE
 
+if test $9 == "true";then
+  echo 'start delete remote files'
+  ssh -o StrictHostKeyChecking=no -p $3 -i $TEMP_SSH_PRIVATE_KEY_FILE $1@$2 rm -rf $6
+fi
+
 if test $7 = "true"; then
   echo "Connection via sftp protocol only, skip the command to create a directory"
 else
   echo 'ssh start'
-
   ssh -o StrictHostKeyChecking=no -p $3 -i $TEMP_SSH_PRIVATE_KEY_FILE $1@$2 mkdir -p $6
 fi
 

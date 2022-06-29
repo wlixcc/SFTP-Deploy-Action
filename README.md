@@ -3,46 +3,21 @@
 > Use this action to deploy your files to server using `SSH Private Key`
 
 > 使用此`action`部署你的项目到服务器上,`仅支持密钥对连接`
+中文介绍链接：[使用Github Action 部署项目到云服务器](https://zhuanlan.zhihu.com/p/107545396)
 
-> [使用Github Action 部署项目到云服务器](https://zhuanlan.zhihu.com/p/107545396)
+## 1. Inputs 
 
-
-## Inputs
-
-### `username`
-
-**Required** sftp username.
-
-### `server`
-
-**Required** sftp server address.
-
-### `port`
-
-sftp srever port , default `22`
-
-### `ssh_private_key`
-
- **Required** you can copy private_key from your `ssh_private_key.pem file`, keep format, and save at`repo/settings/secrets`
-
-
-![](./resource/secret.jpg)
-
-### `local_path`
-
- **Required** `local_path` of you project, if you want put single file:use path like `./myfile`, if you want put directory: use path like `./static/*`, it will put all files under `static` directory. Default to `./*`(will put all files in your repo).
-
-### `remote_path`
-
- **Required** remote_path
-
-### `sftp_only`
-
-connection via sftp protocol only, the default value is `false`. If your port only accepts the sftp protocol, set this option to `true`. However, please note that when this option is set to `true`, the remote folder will not be created automatically.
-
-### `args`
-args of sftp cmd, E.g.`-o ConnectTimeout=5`
-
+| Name                   | Required             | Default | Description                                   |
+|------------------------|----------------------|---------|-----------------------------------------------|
+`username` | yes| | SSH username
+`server` | yes| | Remote host
+`port`| yes | 22 | Remote host port
+`ssh_private_key`| yes| | You can copy private key from your `ssh_private_key.pem` file, and save to`repo/settings/secrets`![](./resource/secret.jpg)
+`local_path`| yes| ./* | `local_path` of you project, if you want put single file:use path like `./myfile`, if you want put directory: use path like `./static/*`, it will put all files under `static` directory. Default to `./*`(will put all files in your repo).
+`remote_path`|yes|/| Remote path
+`sftp_only`| no| | If your port only accepts the sftp protocol, set this option to `true`. However, please note that when this option is set to `true`, the remote folder will not be created automatically.
+`args` | no| | other args yor want to use of sftp, E.g.`-o ConnectTimeout=5`
+`delete_remote_files` | no | false | Set `true` will delete all files in the remote path before upload. Please be `careful` set this to true
 
 ## Action Example	
 
@@ -57,7 +32,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	      - name: Checkout
 	        uses: actions/checkout@v2
 	      - name: deploy file
-	        uses: wlixcc/SFTP-Deploy-Action@v1.0
+	        uses: wlixcc/SFTP-Deploy-Action@v1.2.3
 	        with:
 	          username: 'root'
 	          server: 'your server ip'
@@ -87,7 +62,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	        run: yarn build
 	
 	      - name: deploy file to server
-	        uses: wlixcc/SFTP-Deploy-Action@v1.0
+	        uses: wlixcc/SFTP-Deploy-Action@v1.2.3
 	        with:
 	          username: 'root'
 	          server: '${{ secrets.SERVER_IP }}'
@@ -121,7 +96,7 @@ args of sftp cmd, E.g.`-o ConnectTimeout=5`
 	        run: yarn build
 	
 	      - name: deploy file to server
-	        uses: wlixcc/SFTP-Deploy-Action@v1.0
+	        uses: wlixcc/SFTP-Deploy-Action@v1.2.3
 	        with:
 	          username: 'root'
 	          server: '${{ secrets.SERVER_IP }}'

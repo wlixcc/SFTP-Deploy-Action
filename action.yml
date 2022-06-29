@@ -27,10 +27,13 @@ inputs:
     description: 'connection via sftp protocol only'
     required: false
     default: false
-
   args:
     description: 'sftp args'
     required: false
+  delete_remote_files:
+    description: 'This operation will delete all files in the remote path before upload. Please be careful set this to true'
+    required: false
+    default: false
 
 
 runs:
@@ -45,6 +48,7 @@ runs:
     - ${{ inputs.remote_path }}
     - ${{ inputs.sftp_only }}
     - ${{ inputs.args }}
+    - ${{ inputs.delete_remote_files }}
 
 branding:
   icon: 'upload-cloud'  
