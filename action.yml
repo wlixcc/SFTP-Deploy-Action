@@ -22,7 +22,6 @@ inputs:
   remote_path:
     description: 'files will copy to under remote_path'
     required: true
-    default: /
   sftp_only:
     description: 'connection via sftp protocol only'
     required: false

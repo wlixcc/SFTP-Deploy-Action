@@ -14,7 +14,7 @@
 `port`| yes | 22 | Remote host port
 `ssh_private_key`| yes| | You can copy private key from your `ssh_private_key.pem` file, and save to`repo/settings/secrets`![](./resource/secret.jpg)
 `local_path`| yes| ./* | `local_path` of you project, if you want put single file:use path like `./myfile`, if you want put directory: use path like `./static/*`, it will put all files under `static` directory. Default to `./*`(will put all files in your repo).
-`remote_path`|yes|/| Remote path
+`remote_path`|yes|| Remote path
 `sftp_only`| no| | If your port only accepts the sftp protocol, set this option to `true`. However, please note that when this option is set to `true`, the remote folder will not be created automatically.
 `args` | no| | other args yor want to use of sftp, E.g.`-o ConnectTimeout=5`
 `delete_remote_files` | no | false | Set `true` will delete all files in the remote path before upload. Please be `careful` set this to true

@@ -18,4 +18,4 @@ jobs:
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           local_path: './action.yml'  # 对应我们项目build的文件夹路径
           remote_path: '/var/www/react-app/'
-          delete_remote_files: true
+          # delete_remote_files: true
