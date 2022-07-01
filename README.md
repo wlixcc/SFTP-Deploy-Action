@@ -17,11 +17,12 @@
 `remote_path`|yes|| Remote path
 `sftp_only`| no| | If your port only accepts the sftp protocol, set this option to `true`. However, please note that when this option is set to `true`, the remote folder will not be created automatically.
 <strike>args</strike> `sftpArgs` | no| | other args yor want to use of sftp, E.g.`-o ConnectTimeout=5`
-`delete_remote_files` | no | false |  **Warning** Set `true` will delete all files in the remote path before upload. Please be `careful` set this to true
+`delete_remote_files` | no | false | Set `true` will delete all files in the remote path before upload. 
 `passowrd`| no| | SSH passsword，If a password is set, `ssh_private_key` is ignored
 
 > **Warning**
-> be `careful` when use `delete_remote_files` This will remove all files in your remote path before uploading
+
+> Be careful when use `delete_remote_files`, This will remove all files in your remote path before uploading
 
 
 
@@ -45,7 +46,7 @@
 	          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
 	          local_path: './static/*'
 	          remote_path: '/var/www/app'
-	          args: '-o ConnectTimeout=5'
+	          sftpArgs: '-o ConnectTimeout=5'
 
 ## 1. [Deploy React App Example](https://github.com/wlixcc/React-Deploy)
 
