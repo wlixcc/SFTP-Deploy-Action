@@ -1,21 +1,23 @@
-name: Continuous Deploy #action名称
-on: [push] #在推送的时候运行此action
+name: Continuous Deploy 
+on: [push] 
 
 jobs:
   deploy_job:
-    runs-on: ubuntu-latest  #运行环境
+    runs-on: ubuntu-latest  
     name: sftp
     steps:
       - name: Checkout    
         uses: actions/checkout@v2 
 
-      # 利用action把build好的文件上传到服务器/var/www/react-app路径下,需要确认此目录已在服务端创建
       - name: deploy file to server
         uses:  ./ # Uses an action in the root directory
         with:  
-          username: 'root'   #ssh user name
-          server: '${{ secrets.SERVER_IP }}'
+          username: 'wl'  
+          server: '${{ secrets.MAC_IP }}'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: './action.yml'  # 对应我们项目build的文件夹路径
-          remote_path: '/var/www/react-app/'
+          local_path: './*' 
+          remote_path: '/Users/wl/Downloads/t/a'
+          sftpArgs: '-o ConnectTimeout=5'
+          # sftp_only: true
+          password: ${{secrets.SSH_PASSWORD}}
           # delete_remote_files: true
