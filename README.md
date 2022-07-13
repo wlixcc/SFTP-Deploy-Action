@@ -30,43 +30,43 @@
 on: [push]
 
 jobs:
-	deploy_job:
-	runs-on: ubuntu-latest
-	name: deploy
-	steps:
-		- name: Checkout
-		uses: actions/checkout@v2
-		- name: deploy file
-		uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-		with:
-			username: 'root'
-			server: 'your server ip'
-			ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
-			local_path: './static/*'
-			remote_path: '/var/www/app'
-			sftpArgs: '-o ConnectTimeout=5'
+    deploy_job:
+    runs-on: ubuntu-latest
+    name: deploy
+    steps:
+        - name: Checkout
+        uses: actions/checkout@v2
+        - name: deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: 'root'
+            server: 'your server ip'
+            ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} 
+            local_path: './static/*'
+            remote_path: '/var/www/app'
+            sftpArgs: '-o ConnectTimeout=5'
 ```
 
 ```yaml
 on: [push]
 
 jobs:
-	deploy_job:
-	runs-on: ubuntu-latest
-	name: deploy
-	steps:
-		- name: Checkout
-		uses: actions/checkout@v2
-      	- name: Deploy file
+    deploy_job:
+    runs-on: ubuntu-latest
+    name: deploy
+    steps:
+        - name: Checkout
+        uses: actions/checkout@v2
+        - name: Deploy file
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          username: ${{ secrets.FTP_USERNAME }}
-          server: ${{ secrets.FTP_SERVER }}
-          port: ${{ secrets.FTP_PORT }}
-          local_path: './static/*'
-          remote_path: '/var/www/app'
-          sftp_only: true
-          password: ${{ secrets.FTP_PASSWORD }}
+            username: ${{ secrets.FTP_USERNAME }}
+            server: ${{ secrets.FTP_SERVER }}
+            port: ${{ secrets.FTP_PORT }}
+            local_path: './static/*'
+            remote_path: '/var/www/app'
+            sftp_only: true
+            password: ${{ secrets.FTP_PASSWORD }}
 ```
 
 ## 1. [Deploy React App Example](https://github.com/wlixcc/React-Deploy)
@@ -77,28 +77,28 @@ jobs:
 on: [push]
 
 jobs:
-	deploy_job:
-	runs-on: ubuntu-latest
-	name: build&deploy
-	steps:
-		# To use this repository's private action, you must check out the repository
-		- name: Checkout
-		uses: actions/checkout@v2
+    deploy_job:
+    runs-on: ubuntu-latest
+    name: build&deploy
+    steps:
+        # To use this repository's private action, you must check out the repository
+        - name: Checkout
+        uses: actions/checkout@v2
 
-		- name: Install Dependencies
-		run: yarn
-		- name: Build
-		run: yarn build
+        - name: Install Dependencies
+        run: yarn
+        - name: Build
+        run: yarn build
 
-		- name: deploy file to server
-		uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-		with:
-			username: 'root'
-			server: '${{ secrets.SERVER_IP }}'
-			ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-			local_path: './build/*'
-			remote_path: '/var/www/react-app'
-			sftpArgs: '-o ConnectTimeout=5'
+        - name: deploy file to server
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: 'root'
+            server: '${{ secrets.SERVER_IP }}'
+            ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+            local_path: './build/*'
+            remote_path: '/var/www/react-app'
+            sftpArgs: '-o ConnectTimeout=5'
 ```
 
  ![](./resource/reactExample.jpg)
@@ -110,35 +110,30 @@ name: continuous deployment
 on: [push]
 
 jobs:
-	deploy_job:
-	runs-on: ubuntu-latest
-	name: build&deploy
-	steps:
-		# To use this repository's private action, you must check out the repository
-		- name: Checkout
-		uses: actions/checkout@v2
-		
-		- name: Install umi
-		run: yarn global add umi  
+    deploy_job:
+    runs-on: ubuntu-latest
+    name: build&deploy
+    steps:
+        # To use this repository's private action, you must check out the repository
+        - name: Checkout
+        uses: actions/checkout@v2
+        
+        - name: Install umi
+        run: yarn global add umi  
 
-		- name: Install Dependencies
-		run: yarn
-		- name: Build
-		run: yarn build
+        - name: Install Dependencies
+        run: yarn
+        - name: Build
+        run: yarn build
 
-		- name: deploy file to server
-		uses: wlixcc/SFTP-Deploy-Action@v1.2.4
-		with:
-			username: 'root'
-			server: '${{ secrets.SERVER_IP }}'
-			ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-			local_path: './dist/*'
-			remote_path: '/var/www/umiapp'
-			sftpArgs: '-o ConnectTimeout=5'
+        - name: deploy file to server
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+            username: 'root'
+            server: '${{ secrets.SERVER_IP }}'
+            ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+            local_path: './dist/*'
+            remote_path: '/var/www/umiapp'
+            sftpArgs: '-o ConnectTimeout=5'
 ```
  ![](./resource/umiExample.jpg)
-	          
-
- 
- 
- 	          
