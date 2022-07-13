@@ -24,7 +24,7 @@
 
 > Be careful when use `delete_remote_files`, This will remove all files in your remote path before uploading
 
-## Action Example
+## Action Examples
 
 ```yaml
 on: [push]
