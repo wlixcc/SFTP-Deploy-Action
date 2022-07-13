@@ -18,7 +18,7 @@
 `sftp_only`| no| | If your port only accepts the sftp protocol, set this option to `true`. However, please note that when this option is set to `true`, the remote folder will not be created automatically.
 <strike>args</strike> `sftpArgs` | no| | other args yor want to use of sftp, E.g.`-o ConnectTimeout=5`
 `delete_remote_files` | no | false | Set `true` will delete all files in the remote path before upload. 
-`password`| no| | SSH passsword，If a password is set, `ssh_private_key` is ignored `on @v1.2.4`
+`password`| no| | SSH passsword，If a password is set, `ssh_private_key` is ignored. `for @v1.2.4 and greater`
 
 > **Warning**
 
