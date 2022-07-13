@@ -3,7 +3,6 @@
 #set -e at the top of your script will make the script exit with an error whenever an error occurs (and is not explicitly handled)
 set -eu
 
-
 TEMP_SSH_PRIVATE_KEY_FILE='../private_key.pem'
 TEMP_SFTP_FILE='../sftp'
 
@@ -12,7 +11,6 @@ if [ -z "$6" ]; then
    echo 'remote_path is empty'
    exit 1
 fi
-
 
 # use password
 if [ -z != ${10} ]; then
@@ -67,4 +65,3 @@ sftp -b $TEMP_SFTP_FILE -P $3 $8 -o StrictHostKeyChecking=no -i $TEMP_SSH_PRIVAT
 
 echo 'Deploy Success'
 exit 0
-
