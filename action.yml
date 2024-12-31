@@ -36,6 +36,13 @@ inputs:
   password:
     description: "SSH passsword，If a password is set, the secret key pair is ignored"
     required: false
+  rsyncArgs:
+    description: "Additional arguments for the rsync command. 
+      You can use this parameter to customize the rsync behavior, such as excluding files or directories.
+      Example: '--exclude=node_modules --exclude=.git --exclude=*.log'.
+      If set, these arguments will be passed directly to the rsync command."
+    required: false
+    default: ""
 
 
 runs:
@@ -52,6 +59,8 @@ runs:
     - ${{ inputs.sftpArgs }}
     - ${{ inputs.delete_remote_files }}
     - ${{ inputs.password }}
+    - ${{ inputs.rsyncArgs }}  
+
 
 branding:
   icon: 'upload-cloud'  

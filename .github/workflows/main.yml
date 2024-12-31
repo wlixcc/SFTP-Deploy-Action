@@ -12,12 +12,15 @@ jobs:
       - name: deploy file to server
         uses:  ./ # Uses an action in the root directory
         with:  
-          username: 'wl'  
-          server: '${{ secrets.MAC_IP }}'
+          username: '${{ secrets.USER }}'  
+          server: '${{ secrets.SERVER_IP }}'
           ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
           local_path: './*' 
-          remote_path: '/Users/wl/Downloads/t/a'
+          remote_path: '/tmp/testAction'
           sftpArgs: '-o ConnectTimeout=5'
+          rsyncArgs: '--exclude *.yml'
+            
+          
           # sftp_only: true
-          password: ${{secrets.SSH_PASSWORD}}
+          # password: ${{secrets.SSH_PASSWORD}}
           # delete_remote_files: true

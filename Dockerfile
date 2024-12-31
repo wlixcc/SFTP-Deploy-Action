@@ -1,15 +1,12 @@
-# Container image that runs your code
-FROM alpine:3.13
+# Use an up-to-date and secure Alpine version
+FROM alpine:3.18
 
-# Copies your code file from your action repository to the filesystem path `/` of the container
+# Install required packages in one RUN statement to reduce image layers
+RUN apk update && apk add --no-cache rsync sshpass openssh
+
+# Copy entrypoint script and set correct permissions
 COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-#Make sure to make you entrypoint.sh file executable:
-RUN chmod 777 entrypoint.sh
-
-RUN apk update
-RUN apk add --no-cache openssh
-
-
-# Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["/entrypoint.sh"]
+# Set the entrypoint for the container
+ENTRYPOINT ["/bin/sh", "/entrypoint.sh"]

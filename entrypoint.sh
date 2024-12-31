@@ -6,6 +6,33 @@ set -eu
 TEMP_SSH_PRIVATE_KEY_FILE='../private_key.pem'
 TEMP_SFTP_FILE='../sftp'
 
+# 定义一个本地临时目录，用于 rsync 过滤后存放文件
+RSYNC_LOCAL_DEST="../filtered_upload"
+
+RSYNC_ARGS="${11}"
+
+# 如果用户“未”设置 exclude（EXCLUDE_PATTERNS 为空），则直接进入原逻辑
+if [ -z "$RSYNC_ARGS" ]; then
+  echo "===> No rsync args provided, skip rsync filtering..."
+else
+  echo "===> rsync args detected, start rsync filtering..."
+
+  # 先清理并创建该临时目录
+  rm -rf "$RSYNC_LOCAL_DEST"
+  mkdir -p "$RSYNC_LOCAL_DEST"
+
+  # 6) 打印完整的 rsync 命令，方便调试
+  echo "===> rsync command: rsync -av $RSYNC_ARGS $5 $RSYNC_LOCAL_DEST/"
+
+  # 执行 rsync 命令
+  rsync -av $RSYNC_ARGS $5 $RSYNC_LOCAL_DEST/
+
+  # 将 $5 替换为过滤后的目录下的所有文件，这样后面原脚本里 put -r $5 $6 就无需改动其他地方
+  set -- "$1" "$2" "$3" "$4" "$RSYNC_LOCAL_DEST/*" "$6" "$7" "$8" "$9" "${10}"
+
+  echo "===> Done rsync filtering. Continue original script..."
+fi
+
 # make sure remote path is not empty
 if [ -z "$6" ]; then
    echo 'remote_path is empty'
@@ -13,9 +40,8 @@ if [ -z "$6" ]; then
 fi
 
 # use password
-if [ -z != ${10} ]; then
+if [ -n "${10}" ]; then
 	echo 'use sshpass'
-	apk add sshpass
 
 	if test $9 == "true";then
   		echo 'Start delete remote files'
