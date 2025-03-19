@@ -45,7 +45,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy to Server
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: 'root'
           server: 'your server ip'
@@ -71,7 +71,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy with Exclude Patterns
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: 'root'
           server: 'your server ip'
@@ -98,7 +98,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy with Password
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: ${{ secrets.FTP_USERNAME }}
           server: ${{ secrets.FTP_SERVER }}
@@ -117,13 +117,13 @@ on: [push]
 jobs:
   deploy_job:
     runs-on: ubuntu-latest
-    name: Deploy with Password
+    name: Deploy with encrypted private key
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Deploy with Password
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+      - name: Deploy with encrypted private key
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: ${{ secrets.FTP_USERNAME }}
           server: ${{ secrets.FTP_SERVER }}
@@ -156,7 +156,7 @@ jobs:
         run: yarn build
 
       - name: Deploy Build Folder
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: 'root'
           server: '${{ secrets.SERVER_IP }}'
