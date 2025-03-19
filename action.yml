@@ -43,7 +43,9 @@ inputs:
       If set, these arguments will be passed directly to the rsync command."
     required: false
     default: ""
-
+  ssh_passphrase:
+    description: "Passphrase for ssh encrypted private-key. If the private-key is not encrypted, this parameter is not required."
+    required: false
 
 runs:
   using: 'docker'
@@ -60,6 +62,7 @@ runs:
     - ${{ inputs.delete_remote_files }}
     - ${{ inputs.password }}
     - ${{ inputs.rsyncArgs }}  
+    - ${{ inputs.ssh_passphrase }}  
 
 
 branding:
