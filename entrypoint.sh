@@ -84,7 +84,7 @@ else
 fi
 
 # check if passphrase is set, if yes decrypt the private key
-if [ -n "${12}" ]; then
+if [ -n "${12:-}" ]; then
   echo 'Use ssh-agent to decrypt private key with passphrase'
   # start ssh agent
   eval $(ssh-agent -s)
@@ -105,7 +105,7 @@ sftp -b $TEMP_SFTP_FILE -P $3 $8 -o StrictHostKeyChecking=no -i $TEMP_SSH_PRIVAT
 
 echo 'Deploy Success'
 # if passphrase is set stop ssh-agent after sftp connection
-if [ -n "${12}" ]; then
+if [ -n "${12:-}" ]; then
   echo 'Clear keys from ssh-agent'
   # delete all keys from RAM
   ssh-add -D
