@@ -20,8 +20,9 @@
 | `sftp_only`            | no       |         | If your port only accepts the sftp protocol, set this option to `true`. However, when set to `true`, the remote folder won't be automatically created. |
 | `sftpArgs`            | no       |         | Extra arguments you want to pass to `sftp`, for example: `-o ConnectTimeout=5`                                       |
 | `delete_remote_files`  | no       | false   | Set to `true` to delete the remote path folder and all files in it **before** uploading.                             |
-| `password`             | no       |         | SSH password. If a password is set, `ssh_private_key` is ignored. *(for @v1.2.4 and greater)*                        |
+| `password`             | no       |         | SSH password. If a password is set, `ssh_private_key` and `ssh_passphrase` is ignored. *(for @v1.2.4 and greater)*                        |
 | `rsyncArgs`            | no       |         | Additional arguments for the `rsync` command. You can customize file synchronization behavior, such as excluding files or directories. Example: `--exclude=node_modules --exclude=.git --exclude=*.log`. *(for @v1.2.5 and greater)* |
+| `ssh_passphrase`           | no       |         | The passphrase for encrypted ssh private-key |
 
 > ⚠️ **Warning:**  
 > Be careful when using `delete_remote_files`. This will **permanently delete** the remote path folder and all files in it **before** uploading.
@@ -44,7 +45,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy to Server
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: 'root'
           server: 'your server ip'
@@ -70,7 +71,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy with Exclude Patterns
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: 'root'
           server: 'your server ip'
@@ -97,7 +98,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Deploy with Password
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: ${{ secrets.FTP_USERNAME }}
           server: ${{ secrets.FTP_SERVER }}
@@ -108,6 +109,31 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
 ```
 
+
+### **🔹 Example with Encrypted Private Key Authentication**
+```yaml
+on: [push]
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: Deploy with encrypted private key
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Deploy with encrypted private key
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+        with:
+          username: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
+          port: ${{ secrets.FTP_PORT }}
+          local_path: './static/*'
+          remote_path: '/var/www/app'
+          sftp_only: true
+          ssh_private_key:  ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh_passphrase: ${{ secrets.SSH_PASSPHRASE }}
+```
 ---
 
 ## 🌐 **3. [Deploy React App Example](https://github.com/wlixcc/React-Deploy)**
@@ -130,7 +156,7 @@ jobs:
         run: yarn build
 
       - name: Deploy Build Folder
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           username: 'root'
           server: '${{ secrets.SERVER_IP }}'
