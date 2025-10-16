@@ -14,7 +14,7 @@ inputs:
     default: "22"
   ssh_private_key:
     description: 'you can copy private_key from your *.pem file, keep format'
-    required: true
+    required: false
   local_path:
     description: 'will put all file under this path'
     required: true
